@@ -1,0 +1,77 @@
+
+getwd()
+p='C:/Users/Admin/Downloads'
+list.dirs()
+list.files()
+library(readr)
+weight_lift <- read.csv("weightlift.csv")
+View(Weight_lift)
+
+library(devtools) install_github('adam-m-mcelhinney/helpRFunctions') library(helpRFunctions)
+
+names(data)
+
+dim(data)
+library(caret)
+library(zoo)
+library(plyr)
+is.na(data)
+which(is.na(data))
+sum(is.na(data))
+colSums(is.na(data))
+data[is.na(data)] <- mean(data, na.rm = TRUE)
+str(data)
+summary(data)
+pairs(data[7:15])
+index last <- as.numeric(ncol(data))
+
+prior <- last - 1
+
+data[,i] <- as.numeric(data[,i])}
+library(doParallel)
+registerDoParallel()
+
+set.seed(12345)
+
+dataTrain<-data[1:4004,]
+
+dataTest<-data[4005:4024,]
+
+cor.check <- cor(dataTrain[, -c(last)])
+
+diag(cor.check) <- 0
+
+plot( levelplot(cor.check,main ="Correlation matrix for all WLE features in training set", scales=list(x=list(rot=90), cex=1.0) ))
+
+fit <- glm(classe~.,data = dataTrain,family = binomial(link='logit'))
+
+library(MASS)
+
+step_fit <- stepAIC(fit,method='backward')
+
+summary(step_fit)
+
+confint(step_fit)
+anova(fit,test = 'Chisq')
+AIC anova(step_fit,test = 'Chisq')
+plot(fit$fitted.values)
+
+pred_link <- predict(fit,newdata = dataTest,type = 'link')
+library(car)
+
+vif(fit)
+
+vif(step_fit)
+library(caret)
+
+dataTest$pred_classe <- ifelse(pred<0.6,'yes','no')
+
+table(dataTest$pred_classe,dataTest$classe)
+round(table(dataTrain$classe)/nrow(dataTrain),2)*100
+round(table(dataTest$classe)/nrow(dataTest),2)*100
+round(table(dataTest$pred_classe)/nrow(dataTest),2)*100
+confusionMatrix(dataTest$classe,dataTest$classe)
+
+
+
+
